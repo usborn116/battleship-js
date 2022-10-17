@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BattleShip</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,700;1,100;1,300;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <h1 class="heading-primary">BattleShip</h1>
+  <section class="grid-container">
+    <div class="player1-interface">
+      <h2 class="heading-secondary">
+        Player    
+        <button class="player-rotate-btn" id="player-rotate-btn"><i class="fa-solid fa-rotate"></i></button>
+      </h2>
+      <div class="grid">
+        <div class="square player-square" id="square-00"></div>
+        <div class="square player-square" id="square-01"></div>
+        <div class="square player-square" id="square-02"></div>
+        <div class="square player-square" id="square-03"></div>
+        <div class="square player-square" id="square-04"></div>
+        <div class="square player-square" id="square-05"></div>
+        <div class="square player-square" id="square-06"></div>
+        <div class="square player-square" id="square-07"></div>
+        <div class="square player-square" id="square-08"></div>
+        <div class="square player-square" id="square-09"></div>
+        <div class="square player-square" id="square-10"></div>
+        <div class="square player-square" id="square-11"></div>
+        <div class="square player-square" id="square-12"></div>
+        <div class="square player-square" id="square-13"></div>
+        <div class="square player-square" id="square-14"></div>
+        <div class="square player-square" id="square-15"></div>
+        <div class="square player-square" id="square-16"></div>
+        <div class="square player-square" id="square-17"></div>
+        <div class="square player-square" id="square-18"></div>
+        <div class="square player-square" id="square-19"></div>
+        <div class="square player-square" id="square-20"></div>
+        <div class="square player-square" id="square-21"></div>
+        <div class="square player-square" id="square-22"></div>
+        <div class="square player-square" id="square-23"></div>
+        <div class="square player-square" id="square-24"></div>
+        <div class="square player-square" id="square-25"></div>
+        <div class="square player-square" id="square-26"></div>
+        <div class="square player-square" id="square-27"></div>
+        <div class="square player-square" id="square-28"></div>
+        <div class="square player-square" id="square-29"></div>
+        <div class="square player-square" id="square-30"></div>
+        <div class="square player-square" id="square-31"></div>
+        <div class="square player-square" id="square-32"></div>
+        <div class="square player-square" id="square-33"></div>
+        <div class="square player-square" id="square-34"></div>
+        <div class="square player-square" id="square-35"></div>
+        <div class="square player-square" id="square-36"></div>
+        <div class="square player-square" id="square-37"></div>
+        <div class="square player-square" id="square-38"></div>
+        <div class="square player-square" id="square-39"></div>
+        <div class="square player-square" id="square-40"></div>
+        <div class="square player-square" id="square-41"></div>
+        <div class="square player-square" id="square-42"></div>
+        <div class="square player-square" id="square-43"></div>
+        <div class="square player-square" id="square-44"></div>
+        <div class="square player-square" id="square-45"></div>
+        <div class="square player-square" id="square-46"></div>
+        <div class="square player-square" id="square-47"></div>
+        <div class="square player-square" id="square-48"></div>
+        <div class="square player-square" id="square-49"></div>
+        <div class="square player-square" id="square-50"></div>
+        <div class="square player-square" id="square-51"></div>
+        <div class="square player-square" id="square-52"></div>
+        <div class="square player-square" id="square-53"></div>
+        <div class="square player-square" id="square-54"></div>
+        <div class="square player-square" id="square-55"></div>
+        <div class="square player-square" id="square-56"></div>
+        <div class="square player-square" id="square-57"></div>
+        <div class="square player-square" id="square-58"></div>
+        <div class="square player-square" id="square-59"></div>
+        <div class="square player-square" id="square-60"></div>
+        <div class="square player-square" id="square-61"></div>
+        <div class="square player-square" id="square-62"></div>
+        <div class="square player-square" id="square-63"></div>
+        <div class="square player-square" id="square-64"></div>
+        <div class="square player-square" id="square-65"></div>
+        <div class="square player-square" id="square-66"></div>
+        <div class="square player-square" id="square-67"></div>
+        <div class="square player-square" id="square-68"></div>
+        <div class="square player-square" id="square-69"></div>
+        <div class="square player-square" id="square-70"></div>
+        <div class="square player-square" id="square-71"></div>
+        <div class="square player-square" id="square-72"></div>
+        <div class="square player-square" id="square-73"></div>
+        <div class="square player-square" id="square-74"></div>
+        <div class="square player-square" id="square-75"></div>
+        <div class="square player-square" id="square-76"></div>
+        <div class="square player-square" id="square-77"></div>
+        <div class="square player-square" id="square-78"></div>
+        <div class="square player-square" id="square-79"></div>
+        <div class="square player-square" id="square-80"></div>
+        <div class="square player-square" id="square-81"></div>
+        <div class="square player-square" id="square-82"></div>
+        <div class="square player-square" id="square-83"></div>
+        <div class="square player-square" id="square-84"></div>
+        <div class="square player-square" id="square-85"></div>
+        <div class="square player-square" id="square-86"></div>
+        <div class="square player-square" id="square-87"></div>
+        <div class="square player-square" id="square-88"></div>
+        <div class="square player-square" id="square-89"></div>
+        <div class="square player-square" id="square-90"></div>
+        <div class="square player-square" id="square-91"></div>
+        <div class="square player-square" id="square-92"></div>
+        <div class="square player-square" id="square-93"></div>
+        <div class="square player-square" id="square-94"></div>
+        <div class="square player-square" id="square-95"></div>
+        <div class="square player-square" id="square-96"></div>
+        <div class="square player-square" id="square-97"></div>
+        <div class="square player-square" id="square-98"></div>
+        <div class="square player-square" id="square-99"></div>
+      </div>
+    </div>
+   
+    <div class="player2-interface">
+      <h2 class="heading-secondary"> Computer </h2>
+      <div class="grid">
+       <div class="square computer-square" id="computer-square-00"></div>
+       <div class="square computer-square" id="computer-square-01"></div>
+       <div class="square computer-square" id="computer-square-02"></div>
+       <div class="square computer-square" id="computer-square-03"></div>
+       <div class="square computer-square" id="computer-square-04"></div>
+       <div class="square computer-square" id="computer-square-05"></div>
+       <div class="square computer-square" id="computer-square-06"></div>
+       <div class="square computer-square" id="computer-square-07"></div>
+       <div class="square computer-square" id="computer-square-08"></div>
+       <div class="square computer-square" id="computer-square-09"></div>
+       <div class="square computer-square" id="computer-square-10"></div>
+       <div class="square computer-square" id="computer-square-11"></div>
+       <div class="square computer-square" id="computer-square-12"></div>
+       <div class="square computer-square" id="computer-square-13"></div>
+       <div class="square computer-square" id="computer-square-14"></div>
+       <div class="square computer-square" id="computer-square-15"></div>
+       <div class="square computer-square" id="computer-square-16"></div>
+       <div class="square computer-square" id="computer-square-17"></div>
+       <div class="square computer-square" id="computer-square-18"></div>
+       <div class="square computer-square" id="computer-square-19"></div>
+       <div class="square computer-square" id="computer-square-20"></div>
+       <div class="square computer-square" id="computer-square-21"></div>
+       <div class="square computer-square" id="computer-square-22"></div>
+       <div class="square computer-square" id="computer-square-23"></div>
+       <div class="square computer-square" id="computer-square-24"></div>
+       <div class="square computer-square" id="computer-square-25"></div>
+       <div class="square computer-square" id="computer-square-26"></div>
+       <div class="square computer-square" id="computer-square-27"></div>
+       <div class="square computer-square" id="computer-square-28"></div>
+       <div class="square computer-square" id="computer-square-29"></div>
+       <div class="square computer-square" id="computer-square-30"></div>
+       <div class="square computer-square" id="computer-square-31"></div>
+       <div class="square computer-square" id="computer-square-32"></div>
+       <div class="square computer-square" id="computer-square-33"></div>
+       <div class="square computer-square" id="computer-square-34"></div>
+       <div class="square computer-square" id="computer-square-35"></div>
+       <div class="square computer-square" id="computer-square-36"></div>
+       <div class="square computer-square" id="computer-square-37"></div>
+       <div class="square computer-square" id="computer-square-38"></div>
+       <div class="square computer-square" id="computer-square-39"></div>
+       <div class="square computer-square" id="computer-square-40"></div>
+       <div class="square computer-square" id="computer-square-41"></div>
+       <div class="square computer-square" id="computer-square-42"></div>
+       <div class="square computer-square" id="computer-square-43"></div>
+       <div class="square computer-square" id="computer-square-44"></div>
+       <div class="square computer-square" id="computer-square-45"></div>
+       <div class="square computer-square" id="computer-square-46"></div>
+       <div class="square computer-square" id="computer-square-47"></div>
+       <div class="square computer-square" id="computer-square-48"></div>
+       <div class="square computer-square" id="computer-square-49"></div>
+       <div class="square computer-square" id="computer-square-50"></div>
+       <div class="square computer-square" id="computer-square-51"></div>
+       <div class="square computer-square" id="computer-square-52"></div>
+       <div class="square computer-square" id="computer-square-53"></div>
+       <div class="square computer-square" id="computer-square-54"></div>
+       <div class="square computer-square" id="computer-square-55"></div>
+       <div class="square computer-square" id="computer-square-56"></div>
+       <div class="square computer-square" id="computer-square-57"></div>
+       <div class="square computer-square" id="computer-square-58"></div>
+       <div class="square computer-square" id="computer-square-59"></div>
+       <div class="square computer-square" id="computer-square-60"></div>
+       <div class="square computer-square" id="computer-square-61"></div>
+       <div class="square computer-square" id="computer-square-62"></div>
+       <div class="square computer-square" id="computer-square-63"></div>
+       <div class="square computer-square" id="computer-square-64"></div>
+       <div class="square computer-square" id="computer-square-65"></div>
+       <div class="square computer-square" id="computer-square-66"></div>
+       <div class="square computer-square" id="computer-square-67"></div>
+       <div class="square computer-square" id="computer-square-68"></div>
+       <div class="square computer-square" id="computer-square-69"></div>
+       <div class="square computer-square" id="computer-square-70"></div>
+       <div class="square computer-square" id="computer-square-71"></div>
+       <div class="square computer-square" id="computer-square-72"></div>
+       <div class="square computer-square" id="computer-square-73"></div>
+       <div class="square computer-square" id="computer-square-74"></div>
+       <div class="square computer-square" id="computer-square-75"></div>
+       <div class="square computer-square" id="computer-square-76"></div>
+       <div class="square computer-square" id="computer-square-77"></div>
+       <div class="square computer-square" id="computer-square-78"></div>
+       <div class="square computer-square" id="computer-square-79"></div>
+       <div class="square computer-square" id="computer-square-80"></div>
+       <div class="square computer-square" id="computer-square-81"></div>
+       <div class="square computer-square" id="computer-square-82"></div>
+       <div class="square computer-square" id="computer-square-83"></div>
+       <div class="square computer-square" id="computer-square-84"></div>
+       <div class="square computer-square" id="computer-square-85"></div>
+       <div class="square computer-square" id="computer-square-86"></div>
+       <div class="square computer-square" id="computer-square-87"></div>
+       <div class="square computer-square" id="computer-square-88"></div>
+       <div class="square computer-square" id="computer-square-89"></div>
+       <div class="square computer-square" id="computer-square-90"></div>
+       <div class="square computer-square" id="computer-square-91"></div>
+       <div class="square computer-square" id="computer-square-92"></div>
+       <div class="square computer-square" id="computer-square-93"></div>
+       <div class="square computer-square" id="computer-square-94"></div>
+       <div class="square computer-square" id="computer-square-95"></div>
+       <div class="square computer-square" id="computer-square-96"></div>
+       <div class="square computer-square" id="computer-square-97"></div>
+       <div class="square computer-square" id="computer-square-98"></div>
+       <div class="square computer-square" id="computer-square-99"></div>
+      </div>
+    </div>
+    
+  </section>
+
+  <script src="https://kit.fontawesome.com/d49ac88477.js" crossorigin="anonymous"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
