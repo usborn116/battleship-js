@@ -1,18 +1,15 @@
-import { createGameboard } from "./Gameboard";
+const Player = (name, gameboard, shipList) => {
 
-const createPlayer = () => {
-  let gameboard = createGameboard()
-
-  const randomAttack = () => {
-    let letters = ['A','B','C','D','E','F','G','H','I','J'];
-    let coord = (letters[Math.floor(Math.random()*letters.length)]+(1+Math.floor(Math.random() * 10)))
-    return coord
-  }
+  const attack = (player, coordinates) => {
+    player.gameboard.receiveAttack(coordinates, player.shipList);
+  } 
 
   return {
+    name,
     gameboard,
-    randomAttack
+    shipList,
+    attack
   }
 }
 
-export {createPlayer}
+export default Player

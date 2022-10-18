@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+  
+  html {
+    font-size: 62.5%;
+  }
+  
+  body {
+    box-sizing: border-box;
+    background-color: #353535;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 300;
+    font-family: "Noto Sans", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  h1, h2 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  
+  .heading-primary {
+    font-size: 4rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+  
+  .heading-secondary {
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    position: relative;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .player-rotate-btn {
+    position: absolute;
+    top: 0;
+    right: 0rem;
+    padding: 1rem;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    color: inherit;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .player-rotate-btn:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .grid-container {
+    display: flex;
+  }
+  
+  .player1-interface,
+  .player2-interface {
+    margin: 2rem 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .grid {
+    height: 40rem;
+    width: 40rem;
+    background-color: #284b63;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+  }
+  
+  .square {
+    border: 1px solid #000;
+  }
+  .square:hover {
+    cursor: pointer;
+  }
+  
+  .computer-square:hover {
+    background-color: #3c6e71;
+  }
+  
+  .shadow {
+    background-color: yellow;
+  }
+  
+  .red {
+    background-color: red;
+  }
+  
+  .green {
+    background-color: green;
+  }
+  
+  .white {
+    background-color: white;
+  }
+  
+  .grey:hover {
+    background-color: grey;
+  }
+  
+  /*# sourceMappingURL=styles.css.map */

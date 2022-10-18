@@ -1,34 +1,28 @@
-export const createShip = (length) => {
-    let hits = [];
-    let coords = [];
-
-    const hit = (space) => {
-        let hitstr = JSON.stringify(hits);
-        let coordstr = JSON.stringify(coords);
-        let spot = JSON.stringify(space);
-        if (hitstr.includes(spot)){
-            return false
-        } else if (coordstr.includes(spot)) {
-            hits.push(spot)
-            return true
-        } else {
-            return false;
-        }
+let hud = document.getElementById('headsup');
+const Ship = (size, name) => {
+    // closure !
+    let positions = [];
+    for (let i = 0; i < size; i++) {
+      positions.push(0);
     }
-
+    const hit = (positionIndex) => {
+      positions[positionIndex] = 1;
+    }
     const isSunk = () => {
-        if(hits.length === length){
-            return true
-        } else {
-            return false
-        }
+      if (positions.includes(0)) return false
+      else {
+        hud.textContent = `${name} Sunk!`;
+        return true;
+      }
     }
-
+  
     return {
-        length: length,
-        hits,
-        hit,
-        isSunk,
-        coords
+      size,
+      name,
+      positions,
+      hit,
+      isSunk
     }
-}
+  }
+  
+  export default Ship

@@ -2,16 +2,11 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/game.js',
+  entry: '/src/game.js',
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Output Management',
-    }),
-  ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -21,6 +16,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
       },
     ],
   },

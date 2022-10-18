@@ -1,167 +1,228 @@
-import {createShip} from './ship.js'
+let hud = document.getElementById('headsup');
+const Gameboard = () => {
+  const grid = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-export const createGameboard = () => {
-  let grid = buildGrid()
-  let ships = []
-  let attacks = []
+  grid.forEach((row, index) => {
+    row.forEach((square, index) => {
+      row[index] = { ship: null, isHit: null};
+    })
+  })
 
-  // returns array of length 10 with items being arrays of length 10
-  function buildGrid() {
-    let grid = []
-    for (let i = 0; i < 10; i++) {
-      let innerGrid = []
-      for (let i = 0; i < 10; i++) {
-        innerGrid.push('')
+  const isCloseToEdge = (ship, startPosition, direction) => {
+    const startingYPosition = startPosition[0];
+    const startingXPosition = startPosition[1];
+    if (startingXPosition + ship.size > 10 && direction === 'x') return true
+    else if (startingYPosition + ship.size > 10 && direction === 'y') return true
+    else return false;
+  }
+
+  const isValidPlacement = (ship, startPosition, direction) => {
+    const startingYPosition = startPosition[0];
+    const startingXPosition = startPosition[1];
+    if(!isCloseToEdge(ship, startPosition, direction)) {
+      if (direction === 'x') {
+        for (let i = 0; i < ship.size; i++) {
+          if (grid[startingYPosition][startingXPosition + i].ship) {
+            return false;
+          }
+        }
+      } else {
+        for (let i = 0; i < ship.size; i++) {
+          if (grid[startingYPosition + i][startingXPosition].ship) {
+            return false;
+          }
+        }
       }
-      grid.push(innerGrid)
+      return true;
+    } else {
+      //edge case
+      if (direction === 'x') {
+        const distanceToEdge = 9 - startingXPosition;
+        const remainingSpotsToPlace = ship.size - (distanceToEdge + 1);
+        for (let i = 0; i <= distanceToEdge; i++) {
+          if (grid[startingYPosition][startingXPosition + i].ship) {
+            return false;
+          }
+        }
+        for (let j = 1; j <= remainingSpotsToPlace; j++) {
+          if (grid[startingYPosition][startingXPosition - j].ship) {
+            return false;
+          }
+        }
+      } else {
+        const distanceToEdge = 9 - startingYPosition;
+        const remainingSpotsToPlace = ship.size - (distanceToEdge + 1);
+        for (let i = 0; i <= distanceToEdge; i++) {
+          if (grid[startingYPosition + i][startingXPosition].ship) {
+            return false;
+          }
+        }
+        for (let j = 1; j <= remainingSpotsToPlace; j++) {
+          if (grid[startingYPosition - j][startingXPosition].ship) {
+            return false;
+          }
+        }
+      }
+      return true;
     }
-    return grid
   }
   
-  const placeShip = (shipLength, coords, horizontal) => {
-    let ship = createShip(shipLength)
-    let x = coords[0].charCodeAt(0)-65
-    let y;
-    if (coords.length > 2){
-        y = coords.slice(-2)-1
-    } else {
-        y = coords[1]-1
-    };
-    let stringified = JSON.stringify(coords)
+  const place = (ship, startPosition, direction) => {
+    const startingYPosition = startPosition[0];
+    const startingXPosition = startPosition[1];
 
-    if(allCoords().some(coord => JSON.stringify(coord) === stringified)) { return 'already exist'}
+    if (isValidPlacement(ship, startPosition, direction) === false) return;
 
-    // if out of bounds, return false
-    const oOB = () => {
-      let statement = false
-      if (x > 9 || y > 9) {
-        statement = true
-      } else if (horizontal && (y + shipLength) > 10) {
-        statement = true
-      } else if (!horizontal && (x + shipLength) > 10) {
-        statement = true
-      }
-      return statement
-    }
-
-    if (oOB()) {
-      return false
-    }
-
-    if (horizontal === false) {
-      for (let i = 0; i < ship.length; i++) {
-        ship.coords.push([x, y+i])
-        grid[x][y + i] = 'x'
+    if(!isCloseToEdge(ship, startPosition, direction)){
+      if (direction === 'x') {
+        for (let i = 0; i < ship.size; i++) {
+          grid[startingYPosition][startingXPosition + i].ship = ship.name;
+        }
+      } else {
+        for (let i = 0; i < ship.size; i++) {
+          grid[startingYPosition + i][startingXPosition].ship = ship.name;
+        }
       }
     } else {
-      for (let i = 0; i < ship.length; i++) {
-        ship.coords.push([x+i,y])
-        grid[x + i][y] = 'x'
+      if (direction === 'x') {
+        const distanceToEdge = 9 - startingXPosition;
+        const remainingSpotsToPlace = ship.size - (distanceToEdge + 1);
+        for (let i = 0; i <= distanceToEdge; i++) {
+          grid[startingYPosition][startingXPosition + i].ship = ship.name;
+        }
+        for (let j = 1; j <= remainingSpotsToPlace; j++) {
+          grid[startingYPosition][startingXPosition - j].ship = ship.name;
+        }
+      } else {
+        const distanceToEdge = 9 - startingYPosition;
+        const remainingSpotsToPlace = ship.size - (distanceToEdge + 1);
+        for (let i = 0; i <= distanceToEdge; i++) {
+          grid[startingYPosition + i][startingXPosition].ship = ship.name;
+        }
+        for (let j = 1; j <= remainingSpotsToPlace; j++) {
+          grid[startingYPosition - j][startingXPosition].ship = ship.name;
+        }
       }
     }
-    ships.push(ship)
-    return ships.length + ships;
+    return grid;
   }
 
-  const receiveAttack = (sqr) => {
-     
-    let hitShip = false;
-    // Technique used to emulate attacks.includes(array)
-    
-    let x = sqr[0].charCodeAt(0)-65
-    let y;
-    if (sqr.length > 2){
-        y = sqr.slice(-2)-1
-    } else {
-        y = sqr[1]-1
-    };
-    let a = JSON.stringify(attacks)
-    let b = JSON.stringify([x,y])
-    if (a.includes(b)) { return false }
-    attacks.push([x,y])
+  const checkHit = (coordinates) => {
+    if (grid[coordinates[0]][coordinates[1]].ship) return true
+    else return false;
+  }
 
-    ships.forEach((ship) => {
-        ship.coords.forEach((coord, index) => {
-            if (coord[0] === x && coord[1] === y) {
-                ship.hit([x,y]);
-                hitShip = true;
-            }
-        })
+  // return true if arrays contain the same values, otherwise return false
+  const compareArray = (array1, array2) => {
+    for (let i = 0; i < array1.length; i++) {
+      if (array1[i] !== array2[i]) return false;
+    }
+    return true;
+  }
+
+  const receiveAttack = (coordinates, listOfShips) => {
+    if (checkHit(coordinates) === true) {
+      grid[coordinates[0]][coordinates[1]].isHit = true;
+      const shipName = grid[coordinates[0]][coordinates[1]].ship;
+      const coordinatesList = [];
+      let indexOfHit;
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          if (grid[i][j].ship === shipName) coordinatesList.push([i,j]);
+        }
+      }
+      for (let i = 0; i < coordinatesList.length; i++) {
+        if (compareArray(coordinates, coordinatesList[i])) indexOfHit = i;
+      }
+      const ship = listOfShips.find(ship => ship.name === shipName);
+      ship.hit(indexOfHit);
+    } else {
+      grid[coordinates[0]][coordinates[1]].isHit = false;
+    }
+  }
+
+  const getShipSquares = () => {
+    const shipSquares = [];
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (grid[i][j].ship) shipSquares.push(grid[i][j]);
+      }
+    }
+    return shipSquares;
+  }
+
+  const isGameOver = () => {
+    const shipSquares = getShipSquares();
+    let foundLiveShip;
+    shipSquares.forEach((shipSquare) => {
+      if (shipSquare.isHit === null) {
+        foundLiveShip = true;
+      }
     })
+    if(foundLiveShip === true) return false
+    else return true
+  }
 
-    if (hitShip === true){
-        return true
+  const renderGameboard = (isComputerPlayer = false) => {
+    if (isComputerPlayer === true) {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++){
+          if (grid[i][j].isHit === true) {
+            const squareElement = document.querySelector(`#computer-square-${i}${j}`);
+            squareElement.classList.add('green');
+          }
+          if (grid[i][j].isHit === false) {
+            const squareElement = document.querySelector(`#computer-square-${i}${j}`);
+            squareElement.classList.add('red');
+          }
+        }
+      }
     } else {
-        return false
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++){
+          if (grid[i][j].ship) {
+            const squareElement = document.querySelector(`#square-${i}${j}`);
+            squareElement.classList.add('white');
+          }
+          if (grid[i][j].isHit === true) {
+            const squareElement = document.querySelector(`#square-${i}${j}`);
+            squareElement.classList.remove('white');
+            squareElement.classList.add('green');
+          }
+          if (grid[i][j].isHit === false) {
+            const squareElement = document.querySelector(`#square-${i}${j}`);
+            squareElement.classList.add('red');
+          }
+        }
+      }
     }
   }
 
-  const allSunk = () => {
-    if (ships.length === 0) {
-      return false
-    }
-
-    if (ships.every(ship => ship.isSunk())) {
-      return true
-    } else {
-      return false
-    }
+  const logAttack = (coordinates) => {
+    if (checkHit(coordinates) === true) hud.textContent = 'Hit!';
+    else hud.textContent = 'Missed';
   }
 
-  const allCoords = () => {
-    let allCoords = []
-    ships.forEach(ship => {
-      ship.coords.forEach(coord => {
-        allCoords.push(coord)
-      })
-    })
-    return allCoords
-  }
-
-  const populateRandomShips = () => {
-    placeShip((1 + Math.floor(Math.random() * 5)), randomCoords(), (Math.random() < parseFloat(0.5)))
-
-    function randomCoords () {
-      let letters = ['A','B','C','D','E','F','G','H','I','J'];
-      let coord = (letters[Math.floor(Math.random()*letters.length)]+(1+Math.floor(Math.random() * 10)))
-      return coord
-    }
-
-    function getShortestShip() {
-      let shortGuy = 2
-      ships.forEach(ship => {
-        if (ship.length < shortGuy) {shortGuy = ship.length}
-      })
-      return shortGuy
-    }
-
-    while (ships.length <= 4) {
-     placeShip((getShortestShip() - 1), randomCoords(), (Math.random() < parseFloat(0.5)))
-    }
-    
-    let overlap = false
-
-    let stringedArray = allCoords().map(JSON.stringify)
-    let newSet = new Set(stringedArray)
-    
-    if (newSet.size < allCoords().length) {
-      overlap = true
-    }
- 
-    if (overlap) {
-      populateRandomShips()
-    }
-    
-  }
 
   return {
     grid,
-    placeShip,
-    ships,
+    place,
+    checkHit,
     receiveAttack,
-    attacks,
-    allSunk,
-    allCoords,
-    populateRandomShips
+    isGameOver,
+    renderGameboard,
+    isValidPlacement,
+    logAttack
   }
 }
+
+export default Gameboard
